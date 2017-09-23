@@ -3,15 +3,15 @@
 
 ## Atividade Acadêmica de Arquitetura 1 e Trabalho de Arquitetura 2##
 
-## Biblioteca##
+### Biblioteca ###
 - ** gtk+** Versão 3.0 (https://www.gtk.org/) 
 
-###Autores###
+### Autores ###
 - **Deived William**
 - **Gabriel Filippo**
 - **Vinicius de Oliveira**
 
-##Instruções suportadas
+### Instruções suportadas ###
 ```C
 static const char *setMipsInstructions[] = 
 {
