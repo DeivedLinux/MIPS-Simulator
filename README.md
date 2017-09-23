@@ -1,10 +1,10 @@
 # MIPS-Simulator
 
 
-## Atividade Acadêmica de Arquitetura 1 e Trabalho de Arquitetura 2##
+## Atividade Acadêmica de Arquitetura 1 e Trabalho de Arquitetura 2
 
 ### Biblioteca ###
-- ** gtk+** Versão 3.0 (https://www.gtk.org/) 
+- **gtk+** Versão 3.0 [Site](https://www.gtk.org/) 
 
 ### Autores ###
 - **Deived William**
