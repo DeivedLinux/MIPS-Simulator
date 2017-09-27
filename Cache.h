@@ -20,11 +20,11 @@ typedef enum _Mapping
 	TotalAssociativity
 }*Mapping;
 
-typedef enum 
+typedef enum _Polity
 {
-	LRU,
-	RANDOM
-}Subs;
+	Lru,
+	Random
+}*Polity;
 
 typedef struct _Cache
 {
