@@ -2,16 +2,28 @@
 #define CACHE_H_
 
 #include <stdbool.h>
+#include "CacheConfig.h"
 
-#define Bytes *1u
 
 #ifndef BLOCK_SIZE
-#define BLOCK_SIZE 16 Bytes
+	#define BLOCK_SIZE 16 Bytes
 #endif
 
-#ifndef CACHE_LEVELS
-#define CACHE_LEVELS
+
+#if CACHE_LEVEL == SINGLE_LEVEL
+	#define CACHE_LEVELS 1
+    #define CACHE_SIZE 128 KB
+
+#elif CACHE_LEVEL == MULT_LEVEL
+	#define CACHE_LEVELS 3u
+	#define CACHE_LEVEL1_SIZE 128  KB
+	#define CACHE_LEVEL2_SIZE 1024 KB
+	#define CACHE_LEVEL3_SIZE 2048 KB
+#else
+	#define CACHE_LEVELS 1
+	#define CACHE_LEVED1_SIZE 128 KB
 #endif
+
 
 typedef enum _Mapping
 {
@@ -20,29 +32,33 @@ typedef enum _Mapping
 	TotalAssociativity
 }*Mapping;
 
-typedef enum _Polity
+typedef enum _Policy
 {
-	Lru,
+	Lru = 0,
 	Random
-}*Polity;
+}*Policy;
 
 typedef struct _Cache
 {
-	struct 
+	
+	struct _Row
 	{
-		void* array;
-	}Block[BLOCK_SIZE];
+		void *block;
+		unsigned tag;
+		bool isValid;
+	}__attribute__((aligned))*Row;
 
 	bool cacheMiss;
 	bool cacheHit;
 	unsigned long long missCounter;
 	unsigned long long hitCounter;
-	void*(*readBlock)(unsigned long long address, struct _Cache* cache);
-	void(*writeBlock)(unsigned long long address, Subs,struct _Cache* cache);
+	void*(*readBlock)(unsigned long long address, struct _Cache*);
+	void(*writeBlock)(unsigned long long address, enum _Policy ,struct _Cache*);
 }*Cache;
 
+extern Cache cache[CACHE_LEVELS];
 
-
+bool initCache();
 
 
 #endif
