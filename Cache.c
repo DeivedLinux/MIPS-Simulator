@@ -3,8 +3,8 @@
 #include <stdio.h>
 
 
-static void* ReadBlock(unsigned address, struct _Cache* cache);
-static void  WriteBlock(unsigned address, enum _Policy policy, struct _Cache* cache);
+static void* ReadBlock(Address address, struct _Cache* cache);
+static void  WriteBlock(Address address, enum _Policy policy, struct _Cache* cache);
 Cache cache[CACHE_LEVELS];
 
 bool initCache()
@@ -35,5 +35,36 @@ bool initCache()
 		cache[2]->Row[i]->block = malloc(CACHE_LEVEL3_SIZE);
 	#endif
 
+	cache->writeBlock = WriteBlock;
+	cache->readBlock = ReadBlock;
+
 	return true;
+
+
+static void  WriteBlock(Address address, enum _Policy policy, struct _Cache* cache)
+{
+
+	switch(policy)
+	{
+		case Lru:
+
+
+		break;
+
+		case Random:
+
+
+		break;
+
+		default:
+			break;
+	}
+}
+
+static void* readBlock(Address address, struct _Cache* cache)
+{
+	if(cache->row[address.offsetByte].tag == address.tag)
+	{
+		
+	}
 }

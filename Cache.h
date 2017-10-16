@@ -38,6 +38,20 @@ typedef enum _Policy
 	Random
 }*Policy;
 
+
+typedef union
+{
+	unsigned int address;
+
+	struct 
+	{
+		unsigned offsetByte:3;
+		unsigned offsetBlock:3;
+		unsigned indice:8;
+		unsigned tag:18	
+	}bits;
+}Address;
+
 typedef struct _Cache
 {
 	
@@ -52,9 +66,10 @@ typedef struct _Cache
 	bool cacheHit;
 	unsigned long long missCounter;
 	unsigned long long hitCounter;
-	void*(*readBlock)(unsigned long long address, struct _Cache*);
-	void(*writeBlock)(unsigned long long address, enum _Policy ,struct _Cache*);
+	void*(*readBlock)(Address address, struct _Cache*);
+	void(*writeBlock)(Address address, enum _Policy ,struct _Cache*);
 }*Cache;
+
 
 extern Cache cache[CACHE_LEVELS];
 
